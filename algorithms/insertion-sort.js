@@ -1,14 +1,14 @@
-function insertionSort(nums){
-  for(let i = 1; i < nums.length; i++) {
-    for(let j = i; j <= i && j >= 0; j--) {
-      if(nums[j - 1] > nums[j]){
-        let aux = nums[j];
-        nums[j] = nums[j - 1];
-        nums[j - 1] = aux;
-      }
-    }
-  }
+function insertionSort(nums) {
+  for (let i = 1; i < nums.length; i++) {
+    let numberToInsert = nums[i];
+    let j;
 
+    for (j = i - 1; nums[j] > numberToInsert && j >= 0; j--) {
+      nums[j + 1] = nums[j];
+    }
+
+    nums[j + 1] = numberToInsert;
+  }
   return nums;
 }
 
@@ -17,8 +17,8 @@ function TestSorting(callback) {
   let sortedNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   let sortedTest = callback(nums);
-  
-  if(JSON.stringify(sortedTest) == JSON.stringify(sortedNums)){
+
+  if (JSON.stringify(sortedTest) == JSON.stringify(sortedNums)) {
     console.log("Test passed!");
   } else {
     console.log("Test not passed! Output:");
@@ -27,5 +27,3 @@ function TestSorting(callback) {
 }
 
 TestSorting(insertionSort);
-
-
