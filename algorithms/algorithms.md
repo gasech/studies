@@ -1,9 +1,51 @@
 # Algorithm Analysis
+<!-- vim-markdown-toc Marked -->
+
+  * [Big O Time Complexity](#big-o-time-complexity)
+    * [What is Big O](#what-is-big-o)
+    * [Example 1](#example-1)
+    * [Example 2](#example-2)
+  * [Spatial Complexity](#spatial-complexity)
+    * [What is Spatial Complexity](#what-is-spatial-complexity)
+    * [Linear](#linear)
+    * [Logarithmic](#logarithmic)
+    * [Constant](#constant)
+    * [Quadratic](#quadratic)
+* [Iterative Sorts](#iterative-sorts)
+  * [Bubble Sort](#bubble-sort)
+    * [Step-by-step example](#step-by-step-example)
+    * [JavaScript Code Example](#javascript-code-example)
+    * [Best, worst, and average cases](#best,-worst,-and-average-cases)
+    * [Spatial Complexity](#spatial-complexity)
+  * [Insertion Sort](#insertion-sort)
+    * [Step-by-step example](#step-by-step-example)
+    * [JavaScript Code Example](#javascript-code-example)
+    * [Best, worst, and average cases](#best,-worst,-and-average-cases)
+    * [Spatial Complexity](#spatial-complexity)
+* [Recursive Sorts](#recursive-sorts)
+  * [Merge Sort](#merge-sort)
+    * [Step-by-step example](#step-by-step-example)
+    * [JavaScript Code Example](#javascript-code-example)
+    * [Best, worst, and average cases](#best,-worst,-and-average-cases)
+    * [Spatial Complexity](#spatial-complexity)
+  * [Quick Sort](#quick-sort)
+    * [Step-by-step example](#step-by-step-example)
+    * [JavaScript Code Example](#javascript-code-example)
+    * [Best, worst, and average cases](#best,-worst,-and-average-cases)
+    * [Spatial Complexity](#spatial-complexity)
+* [Non-Comparison Sorts](#non-comparison-sorts)
+  * [Radix Sort](#radix-sort)
+    * [Step-by-step example](#step-by-step-example)
+    * [JavaScript Code Example](#javascript-code-example)
+    * [Best, worst, and average cases](#best,-worst,-and-average-cases)
+    * [Spatial Complexity](#spatial-complexity)
+
+<!-- vim-markdown-toc -->
 
 ## Big O Time Complexity
-It's a method used to measure how efficient is an algorithm without getting into too much details, if you don't know how it works you can't judge if your algorithm is getting faster or slower.
 
-> In industry (and therefore in interviews), people seem to have merged Big $\theta$ (Theta) and Big O together. Industry's meaning of Big O is closer to what academics mean by $\theta$.
+### What is Big O
+It's a method used to measure how efficient is an algorithm without getting into too much details, if you don't know how it works you can't judge if your algorithm is getting faster or slower.
 
 Think of the O as a vacuum that sucks in all the unimportant information and just leaves you with the important stuff. 
 
@@ -15,8 +57,11 @@ In other words, most of the piece of the pie comes from the first term, to the p
 
 We ignore the little parts and concentrate on the big parts. Keeping with $3x² + x + 1$, the Big O for this equation would be O(n²) where O is just absorbing all the other fluff (including the factor on the biggest term.) Just grab the biggest term.
 
+> In industry (and therefore in interviews), people seem to have merged Big $\theta$ (Theta) and Big O together. Industry's meaning of Big O is closer to what academics mean by $\theta$.
 
-**Example:**
+We have some examples below.
+
+### Example 1
 ```javascript
 function findNumber(nums, value){
   for(let i = 0; i < nums.length; i++) {
@@ -31,7 +76,7 @@ This code is $n + 1$ because it has a loop that depends on the quantity of entri
 
 Ignore the $+ 1$ because it's not relevant close to $n$, now we are left with O(n), which is the Big O of this algorithm.
 
-**Example 2:**
+### Example 2
 ```javascript
 function combineAndPrintNums(nums){
   let combinedNums = [];
@@ -47,6 +92,7 @@ function combineAndPrintNums(nums){
   }
 }
 ```
+
 Now, this code is $n^2 + n + 1$, we just ignore the smaller terms... The big O is O($n^2$)
 
 The time of the algorithm is greatly affected depending on the input. Here we can see a graphical example.
@@ -54,6 +100,9 @@ The time of the algorithm is greatly affected depending on the input. Here we ca
 <img alt="Graph showing different algorithm performance by time" src="https://droidtechknow.com/programming/algorithms/big-o-notation/images/big-o-notation.jpg" width="500"/>
 
 ## Spatial Complexity
+
+### What is Spatial Complexity
+
 Spatial Complexity is the amount of space (e.g. how much RAM or disk space) an algorithm needs to complete.
 
 One space complexity algorithm isn't necessarily better than the other. And very frequently you need to make the trade off of computational complexity vs spatial. Some algorithms eat a lot of memory but go fast and there are lots that eat zero memory but go slow. It just depends on what your needs are.
@@ -77,12 +126,14 @@ If we create exact 10 (length of the input array) extra arrays for each element,
 
 ![Bubble Sort Graphical Example](https://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif) 
 
-Normally Bubble Sort is not used in real life scenarios due to how it scales with larger amounts of data, but is a good teaching algorithm.
+Normally Bubble Sort is not used in [real life scenarios due to how it scales with larger amounts of data](https://www.youtube.com/watch?v=k4RRi_ntQc8), but is a good teaching algorithm.
 
-The algorithms pops up the numbers to the top, just like a bubble (that's a good way of reminding how it works).
+* The algorithms pops up the numbers to the top, just like a bubble (that's a good way of reminding how it works).
 
 * The algorithm loops through the list and swaps numbers if they are larger than the next.
-* If did not swap items, your list is sorted.
+
+* If you did not swap items, your list is sorted.
+
 * If you swapped items, then you have to loop again and again, until no swaps happens.
 
 
@@ -161,10 +212,11 @@ Average case looks like O(log n) since we are making less swaps then the length 
 We don't create any extra array using this algorithm, so that would be constant O(1).
 
 ## Insertion Sort
-
 ![Insertion Sort Graphical Example](https://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif) 
 
 This algorithm stars at index 1 (assuming we are starting at 0), compares the index with the left part of the array and inserts it in the right place.
+
+* Insertion sort is one of the fastest algorithms for sorting very small arrays, even faster than quicksort.
 
 ### Step-by-step example
 ```
@@ -233,12 +285,124 @@ Insertion Sort does not create any extra array, so it's constant time O(1).
 # Recursive Sorts
 
 ## Merge Sort
+![Graphical Example of Merge Sort](https://upload.wikimedia.org/wikipedia/commons/c/cc/Merge-sort-example-300px.gif) 
 
+Merge Sort splits the array into smaller pieces and then rearranges together sorting it.
+
+![Diagram of Merge Sort](https://upload.wikimedia.org/wikipedia/commons/e/e6/Merge_sort_algorithm_diagram.svg)
+
+### Step-by-step example
+```
+mergeSort([1, 5, 7, 4, 2, 3, 6]) -- depth 0
+
+mergeSort([1, 5, 7, 4]) // mergeSort([2, 3, 6]) -- depth 1
+
+mergeSort([1, 5]) // mergeSort([7, 4]) -- depth 2
+
+mergeSort([1]) // mergeSort([5]) -- depth 3
+[1] is of length one. Base case. Return sorted list [1] -- depth 3
+
+mergeSort([5]) -- depth 3
+[5] is of length one. Base case. Return sorted list [5] -- depth 3
+
+merge([1], [5]) -- depth 3
+Is 1 or 5 smaller? 1. Add to end. [1]
+Left array is empty, concat right array. [1, 5]
+Return sorted array [1, 5].
+
+mergeSort([7, 4]) -- depth 2
+
+mergeSort([7]) // mergeSort([4]) -- depth 3
+[7] is of length one. Base case. Return sorted list [7] -- depth 3
+
+mergeSort([4]) -- depth 3
+[4] is of length one. Base case. Return sorted list [4] -- depth 3
+
+merge([7], [4]) -- depth 3
+Is 7 or 4 smaller? 4. Add to end. [4]
+Right array is empty, concat left array. [4, 7]
+Return sorted array [4, 7]
+
+merge([1, 5], [4, 7]) -- depth 2
+Is 1 or 4 smaller? 1. Add to end. [1]
+Is 5 or 4 smaller? 4. Add to end. [1, 4]
+Is 5 or 7 smaller? 5. Add to end. [1, 4, 5]
+Left array is empty, concat right array. [1, 4, 5, 7]
+Return sorted array [1, 4, 5, 7]
+
+mergeSort([2, 3, 6]) -- depth 1
+
+mergeSort([2, 3]) // mergeSort([6]) -- depth 2
+
+mergeSort([2]) // mergeSort([3]) -- depth 3
+[2] is of length one. Base case. Return sorted list [2]
+
+mergeSort([3]) -- depth 3
+[3] is of length one. Base case. Return sorted list [3]
+
+merge([2], [3]) -- depth 3
+Is 2 or 4 smaller? 2. Add to end. [2]
+Left array is empty, concat right array. [2, 3]
+Return sorted array [2, 4]
+
+mergeSort([6]) -- depth 2
+[6] is of length one. Base case. Return sorted list [6]
+
+merge([2, 3], [6]) -- depth 2
+Is 2 or 6 smaller? 2. Add to end. [2]
+Is 3 or 6 smaller? 3. Add to end. [2, 3]
+Left array is empty, concat right array. [2, 3, 6]
+Return sorted array [2, 3, 6]
+
+merge([1, 4, 5, 7], [2, 3, 6]) -- depth 1
+Is 1 or 2 smaller? 1. Add to end. [1]
+Is 4 or 2 smaller? 2. Add to end. [1, 2]
+Is 4 or 3 smaller? 3. Add to end. [1, 2, 3]
+Is 4 or 6 smaller? 4. Add to end. [1, 2, 3, 4]
+Is 5 or 6 smaller? 5. Add to end. [1, 2, 3, 4, 5]
+Is 7 or 6 smaller? 6. Add to end. [1, 2, 3, 4, 5, 6]
+Right array is empty, concat left array. [1, 2, 3, 4, 5, 6, 7]
+Return sorted list [1, 2, 3, 4, 5, 6, 7]
+```
+
+### JavaScript Code Example
+```javascript
+function MergeSort(arr) {
+  if(arr.length < 2) return arr;
+
+  const middle = Math.floor(arr.length / 2);
+  const left = arr.slice(0, middle);
+  const right = arr.slice(middle);
+
+  const sortedLeft = MergeSort(left);
+  const sortedRight = MergeSort(right);
+
+  return Merge(sortedLeft, sortedRight);
+}
+
+function Merge(left, right) {
+  const results = [];
+
+  while(left.length && right.length){
+    if(left[0] <= right[0]){
+      results.push(left.shift());
+    } else {
+      results.push(right.shift());
+    }
+  }
+
+  return results.concat(left, right);
+}
+```
 ### Best, worst, and average cases
 
 ### Spatial Complexity
 
 ## Quick Sort
+
+### Step-by-step example
+
+### JavaScript Code Example
 
 ### Best, worst, and average cases
 
@@ -247,4 +411,13 @@ Insertion Sort does not create any extra array, so it's constant time O(1).
 # Non-Comparison Sorts
 
 ## Radix Sort
+
+### Step-by-step example
+
+### JavaScript Code Example
+
+### Best, worst, and average cases
+
+### Spatial Complexity
+
 
