@@ -287,7 +287,7 @@ Insertion Sort does not create any extra array, so it's constant time O(1).
 ## Merge Sort
 ![Graphical Example of Merge Sort](https://upload.wikimedia.org/wikipedia/commons/c/cc/Merge-sort-example-300px.gif) 
 
-Merge Sort splits the array into smaller pieces and then rearranges together sorting it.
+Merge Sort divides the input into equal parts until only two numbers are there for comparisons and then after comparing and ordering each parts it merges them all together back to the input.
 
 ![Diagram of Merge Sort](https://upload.wikimedia.org/wikipedia/commons/e/e6/Merge_sort_algorithm_diagram.svg)
 
