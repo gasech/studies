@@ -102,7 +102,6 @@ The time of the algorithm is greatly affected depending on the input. Here we ca
 ## Spatial Complexity
 
 ### What is Spatial Complexity
-
 Spatial Complexity is the amount of space (e.g. how much RAM or disk space) an algorithm needs to complete.
 
 One space complexity algorithm isn't necessarily better than the other. And very frequently you need to make the trade off of computational complexity vs spatial. Some algorithms eat a lot of memory but go fast and there are lots that eat zero memory but go slow. It just depends on what your needs are.
@@ -219,7 +218,7 @@ This algorithm stars at index 1 (assuming we are starting at 0), compares the in
 * Insertion sort is one of the fastest algorithms for sorting very small arrays, even faster than quicksort.
 
 ### Step-by-step example
-```
+```text
 [3, 2, 5, 4, 1]
 
     ↓
@@ -287,12 +286,12 @@ Insertion Sort does not create any extra array, so it's constant time O(1).
 ## Merge Sort
 ![Graphical Example of Merge Sort](https://upload.wikimedia.org/wikipedia/commons/c/cc/Merge-sort-example-300px.gif) 
 
-Merge Sort divides the input into equal parts until only two numbers are there for comparisons and then after comparing and ordering each parts it merges them all together back to the input.
+Merge Sort is a divide-and-conquer algorithm. It works by dividing the input into equal parts until only two numbers are there for comparisons and then after comparing and ordering each parts it merges them all together back to the input.
 
 ![Diagram of Merge Sort](https://upload.wikimedia.org/wikipedia/commons/e/e6/Merge_sort_algorithm_diagram.svg)
 
 ### Step-by-step example
-```
+```text
 mergeSort([1, 5, 7, 4, 2, 3, 6]) -- depth 0
 
 mergeSort([1, 5, 7, 4]) // mergeSort([2, 3, 6]) -- depth 1
@@ -395,18 +394,72 @@ function Merge(left, right) {
 }
 ```
 ### Best, worst, and average cases
+With Merge Sort every case is the worst case scenario. And the best. And the average. No matter what, the array always gets broken down into lists of 1 and then built back up, which ends it up by being O(n log n). 
 
 ### Spatial Complexity
+For every element in our input Merge Sort will create an array, so it has a spatial complexity of O(n).
 
 ## Quick Sort
+![Quick sort animation example](https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Sorting_quicksort_anim.gif/220px-Sorting_quicksort_anim.gif)
+
+It's another divide-and-conquer, recursive algorithm but it takes a slightly different approach. It works by selecting a 'pivot' element from the array partitioning the other elements into sub arrays (left and right), according to whether they are less than or greater than the pivot. Calls Quick Sort recursively for both sub arrays. After those two sorts come back, you concatenate the sorted left list, the pivot, and then the right list. 
+
+![Quick Sort diagram example](https://www.techiedelight.com/wp-content/uploads/Quicksort.png)
 
 ### Step-by-step example
+```text
+[4,9,3,5] list
+-> 5 is made the pivot since it's the last in the array
+-> divide list into two lists, [4,3] and [9]
+-> call quicksort on those two lists
 
+[4, 3]
+-> 3 is pivot
+-> call quicksort on [] and [4]
+-> those both return as is as they are the base case of length 0 or 1
+-> concat [], 3, and [4]
+-> return [3,4]
+
+[9]
+-> returns as this it is a base case of length 1
+
+(back into the original function call)
+-> call concat on [3,4], 5, and [9]
+-> return [3,4,5,9]
+```
 ### JavaScript Code Example
+```javascript
+function QuickSort(arr){
+  if(arr.length < 2) return arr;
+
+  let pivot = arr[arr.length - 1];
+  let left = [];
+  let right = [];
+  
+  for(let i = 0; i < arr.length - 1; i++){
+    if(arr[i] >= pivot) {
+      right.push(arr[i]);
+    } else {
+      left.push(arr[i]);
+    }
+  }
+
+  let sortedLeft = QuickSort(left);
+  let sortedRight = QuickSort(right);
+
+  return sortedLeft.concat(pivot, sortedRight);
+}
+```
 
 ### Best, worst, and average cases
+The best case would be a randomly sorted list, so the pivots are going to get a good mix on left and right arrays, so that would be O(n log n).
+
+Worst cases would be a sorted list or reversed list since you always will create sub arrays for a individual side (right or left) comparing every number to every number, that would be O(n$^2$)
+
+Average case should be the same as best case. O(n log n).
 
 ### Spatial Complexity
+Spatial complexity for quick sort is also O(n), same as merge sort. But there are some quick sort variations that make it better.
 
 # Non-Comparison Sorts
 
