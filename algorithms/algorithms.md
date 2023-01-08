@@ -3,14 +3,22 @@
 
   * [Big O Time Complexity](#big-o-time-complexity)
     * [What is Big O](#what-is-big-o)
-    * [Example 1](#example-1)
-    * [Example 2](#example-2)
+    * [Time Complexity Classes](#time-complexity-classes)
+      * [Constant O(1)](#constant-o(1))
+      * [Logarithmic O(log n)](#logarithmic-o(log-n))
+      * [Linear O(n)](#linear-o(n))
+      * [Quasilinear O(n log n)](#quasilinear-o(n-log-n))
+      * [Exponential O(2$^n$)](#exponential-o(2$^n$))
+      * [Factorial O(n!)](#factorial-o(n!))
+    * [Big O Example 1](#big-o-example-1)
+    * [Big O Example 2](#big-o-example-2)
   * [Spatial Complexity](#spatial-complexity)
     * [What is Spatial Complexity](#what-is-spatial-complexity)
-    * [Linear](#linear)
-    * [Logarithmic](#logarithmic)
-    * [Constant](#constant)
-    * [Quadratic](#quadratic)
+    * [Spatial Complexity Classes](#spatial-complexity-classes)
+      * [Linear](#linear)
+      * [Logarithmic](#logarithmic)
+      * [Constant](#constant)
+      * [Quadratic](#quadratic)
 * [Iterative Sorts](#iterative-sorts)
   * [Bubble Sort](#bubble-sort)
     * [Step-by-step example](#step-by-step-example)
@@ -39,6 +47,7 @@
     * [JavaScript Code Example](#javascript-code-example)
     * [Best, worst, and average cases](#best,-worst,-and-average-cases)
     * [Spatial Complexity](#spatial-complexity)
+* [Binary Search](#binary-search)
 
 <!-- vim-markdown-toc -->
 
@@ -59,9 +68,30 @@ We ignore the little parts and concentrate on the big parts. Keeping with $3x² 
 
 > In industry (and therefore in interviews), people seem to have merged Big $\theta$ (Theta) and Big O together. Industry's meaning of Big O is closer to what academics mean by $\theta$.
 
-We have some examples below.
+### Time Complexity Classes 
+The time of the algorithm is greatly affected depending on the input. Here we can see a graphical example.
 
-### Example 1
+<img alt="Graph showing different algorithm performance by time" src="https://droidtechknow.com/programming/algorithms/big-o-notation/images/big-o-notation.jpg" width="500"/>
+
+#### Constant O(1)
+The number of operations stays the same, independent of the number of elements.
+
+#### Logarithmic O(log n)
+The number of operations increases by a constant amount whenever the number of elements doubles.
+
+#### Linear O(n)
+The number of operations grows linearly with the number of elements n. If n doubles, the number of operations doubles, too
+
+#### Quasilinear O(n log n)
+The number of operations grows slightly faster than linear as the linear component is multiplied with a logarithmic one.
+
+#### Exponential O(2$^n$)
+The number of operations grows linearly with the square of the number of elements n. If n doubles, the number of operations quadruples
+
+#### Factorial O(n!)
+The number of operations grows linearly with the factorial of the number of elements n, which is the product of all numbers up to (and including) n.
+
+### Big O Example 1
 ```javascript
 function findNumber(nums, value){
   for(let i = 0; i < nums.length; i++) {
@@ -76,7 +106,7 @@ This code is $n + 1$ because it has a loop that depends on the quantity of entri
 
 Ignore the $+ 1$ because it's not relevant close to $n$, now we are left with O(n), which is the Big O of this algorithm.
 
-### Example 2
+### Big O Example 2
 ```javascript
 function combineAndPrintNums(nums){
   let combinedNums = [];
@@ -95,27 +125,25 @@ function combineAndPrintNums(nums){
 
 Now, this code is $n^2 + n + 1$, we just ignore the smaller terms... The big O is O($n^2$)
 
-The time of the algorithm is greatly affected depending on the input. Here we can see a graphical example.
-
-<img alt="Graph showing different algorithm performance by time" src="https://droidtechknow.com/programming/algorithms/big-o-notation/images/big-o-notation.jpg" width="500"/>
-
 ## Spatial Complexity
 
 ### What is Spatial Complexity
 Spatial Complexity is the amount of space (e.g. how much RAM or disk space) an algorithm needs to complete.
 
+
+### Spatial Complexity Classes
 One space complexity algorithm isn't necessarily better than the other. And very frequently you need to make the trade off of computational complexity vs spatial. Some algorithms eat a lot of memory but go fast and there are lots that eat zero memory but go slow. It just depends on what your needs are.
 
-### Linear
+#### Linear
 Let's say we have an algorithm that for every item in the array, it needs to create another array in the process of sorting it. So for an array of length 10, our algorithm will create 10 arrays. For an array of 100, it'd create 100 extra arrays. This would be O(n) in terms of its spatial complexity.
 
-### Logarithmic
+#### Logarithmic
 What about another for every item in the array, it needed to create a diminishing amount of extra arrays. For example: for an array of length 10, it'd create 7 arrays. For an array of 100, it'd create 12 arrays. For an array of 1000, it'd created 20 arrays. This would be O(log n).
 
-### Constant
+#### Constant
 What if we didn't create any extra arrays when we did our algorithm? We just used the same space we were given when we first started. Or if we created just 10 arrays, no matter how long the array is? This would be O(1) since it's constant no matter what. Its spatial need don't increase with longer arrays.
 
-### Quadratic
+#### Quadratic
 Let's say we input a array into our algorithm that contains 10 elements.
 If we create exact 10 (length of the input array) extra arrays for each element, than that would be an example of a quadratic spatial time complexity, O(n$^2$).
 
@@ -465,12 +493,107 @@ Spatial complexity for quick sort is also O(n), same as merge sort. But there ar
 
 ## Radix Sort
 
+Radix Sort is pretty easy to understand conceptually, but I found it pretty hard to implement this myself.
+
+But uh, it's a non-comparison sort. The way it works is by finding the longest, yes, longest not largest number in the array.
+
+So.. In `[9414, 1, 123, 145]`, `9414` is our longest number because it has 4 digits. 
+
+Then we need a data structure that has 10 arrays ranging from 0 to 9.
+
+For each element in our input we have to insert into a bucket, the criteria is the last digit, if the last digit is `6` then insert into the 7th bucket `6`.
+
+Now we dequeue all the numbers the buckets to the array again, and now the criteria is the second digit, that goes on and on, then the list gets sorted.
+
+
 ### Step-by-step example
+```text
+-> [109, 224, 901, 58, 41]
+Longest Digit Number -> 3
+
+For the first digit insert into the right bucket: 
+
+Buckets:  
+0: [] 1: [901, 41] 2: [] 3: [] 4: [224] 
+
+5: [] 6: [] 7: [] 8: [58] 9: [109]
+
+Now dequeue all to the array again in order
+
+-> [901, 41, 224, 58, 109]
+
+For the second digit insert into the right bucket:
+Buckets:  
+0: [901] 1: [] 2: [] 3: [] 4: [41, 224] 
+
+5: [] 6: [] 7: [] 8: [58] 9: [109]
+
+Now dequeue all to the array again in order
+
+-> [901, 41, 224, 58, 109]
+
+For the third digit insert into the right bucket:
+Buckets:  
+0: [41, 58] 1: [109] 2: [224] 3: [] 4: [] 
+
+5: [] 6: [] 7: [] 8: [] 9: [901]
+
+Now dequeue all to the array again in order
+
+Longest digit have been reached, list is sorted.
+```
 
 ### JavaScript Code Example
+```javascript
+function getDigit(number, place, longestNumber) {
+  const string = number.toString();
+  const size = string.length;
+
+  const mod = longestNumber - size;
+  return string[place - mod] || 0;
+}
+
+function getLongestNumber(nums) {
+  let longest = 0;
+
+  for (let i = 0; i < nums.length; i++) {
+    const currentLength = nums[i].toString().length;
+    longest = currentLength > longest ? currentLength : longest;
+  }
+
+  return longest;
+}
+
+function RadixSort(nums) {
+  const longestNumber = getLongestNumber(nums);
+
+  const buckets = new Array(10).fill().map(() => [])
+
+  for (let i = longestNumber - 1; i >= 0; i--) {
+    while (nums.length) {
+      const current = nums.shift();
+
+      buckets[getDigit(current, i, longestNumber)].push(current);
+    }
+
+    for (let j = 0; j < 10; j++) {
+      while (buckets[j].length) {
+        nums.push(buckets[j].shift())
+      }
+    }
+  }
+
+  return nums;
+}
+```
 
 ### Best, worst, and average cases
+The Big O of this algorithm is always the same, because it will sort the same way, which is O($nw$), where $n$ is the number of keys, and $w$ the keys length. 
+
+Radix sort works pretty well with an input of numbers ranging from 100-1000.
 
 ### Spatial Complexity
+It's not great considering how much it takes on space which is O(n + k).
 
+# Binary Search
 
