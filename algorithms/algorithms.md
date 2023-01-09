@@ -48,6 +48,9 @@
     * [Best, worst, and average cases](#best,-worst,-and-average-cases)
     * [Spatial Complexity](#spatial-complexity)
 * [Binary Search](#binary-search)
+  * [Step-by-step example](#step-by-step-example)
+  * [JavaScript Code Example](#javascript-code-example)
+  * [Best, worst, and average cases](#best,-worst,-and-average-cases)
 
 <!-- vim-markdown-toc -->
 
@@ -596,4 +599,50 @@ Radix sort works pretty well with an input of numbers ranging from 100-1000.
 It's not great considering how much it takes on space which is O(n + k).
 
 # Binary Search
+Binary search is a better way of searching through a sorted array instead of a linear search.
 
+The way binary search works is by looking for the element in the middle of the array, if you find, then return it.
+
+If it's larger then the middle then you look into the middle of the right part, if it's not larger then you look into the middle of the left part.
+
+So you just keep cutting half of the array until you find the element.
+
+## Step-by-step example
+```
+[0, 5, 10, 12, 15, 19, 21, 22, 24, 30]
+
+search for 12
+
+start in the middle, is 19 === 12? no, smaller, go left
+
+look in the middle of the smaller half, 10 === 12? no, larger, go right
+
+look in the middle of the larger half (which is now just one number), is 12 === 12? yes, found element
+```
+
+## JavaScript Code Example
+```javascript
+function BinarySearch(arr, id) {
+  let min = 0;
+  let max = arr.length - 1;
+  let index;
+
+  while (min <= max) {
+    index = Math.floor((min + max) / 2);
+    if (arr[index] == id) return arr[index];
+
+    if (arr[index] < id) {
+      min = index + 1;
+    } else {
+      max = index - 1;
+    }
+  }
+
+  return false;
+}
+```
+
+## Best, worst, and average cases
+Best case would be the element is in the middle that would require one iteration, so O(1).
+
+Worst and average case is the same, this algorithm will keep halving the array until It cannot anymore.
