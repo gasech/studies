@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "module": "CommonJS" // where to put the TS files
+  },
+  "include": [
+    "src"
+  ] // which files to compile
+}
