@@ -74,7 +74,7 @@ We ignore the little parts and concentrate on the big parts. Keeping with $3x² 
 ### Time Complexity Classes 
 The time of the algorithm is greatly affected depending on the input. Here we can see a graphical example.
 
-<img alt="Graph showing different algorithm performance by time" src="https://droidtechknow.com/programming/algorithms/big-o-notation/images/big-o-notation.jpg" width="500"/>
+![Graph showing different algorithm performance by time](https://cdn-media-1.freecodecamp.org/images/1*KfZYFUT2OKfjekJlCeYvuQ.jpeg)
 
 #### Constant O(1)
 The number of operations stays the same, independent of the number of elements.
