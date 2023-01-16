@@ -1,4 +1,20 @@
 # TypeScript Notes
+
+<!-- vim-markdown-toc Marked -->
+
+* [TypeScript](#typescript)
+  * [Variables](#variables)
+    * [Inference](#inference)
+    * [Literal](#literal)
+    * [Any](#any)
+  * [Functions](#functions)
+  * [Objects](#objects)
+  * [Arrays](#arrays)
+  * [Tuples](#tuples)
+
+<!-- vim-markdown-toc -->
+
+# TypeScript
 Typescript uses the tsc compiler
 
 ## Variables
@@ -101,6 +117,26 @@ const myCar = {
 }
 
 printCar(myCar); // This does not give you an error, because you can use the color property elsewhere. It's not an "useless" property.
-
 ```
 
+## Arrays
+You can write arrays specifying the type then declaring it to be an array. Like so.
+
+```typescript
+const names: string[] = [];
+names.push("Gabriel");
+```
+
+## Tuples
+Tuples are a small set of data.
+You can declare it, like so.
+
+```typescript
+const numPar: [number, number] = [1,2];
+
+// You can't do this.
+let nameAge: [string, number];
+nameAge = ["George", 31, "Random"];
+```
+
+You can use built in array functions like `.pop` and `.push`, TypeScript won't stop you from doing that, which is weird.
